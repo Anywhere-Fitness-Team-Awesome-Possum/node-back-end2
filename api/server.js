@@ -19,4 +19,4 @@ server.use('/api/auth', authRouter);
 server.use('/api/auth/users/classes', userRouter);
 server.use('/api/auth/instructor/classes', instructorRouter);
 
-module.exports = server;
+module.exports = server; 
