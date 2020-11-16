@@ -5,7 +5,7 @@ const instructorRouter = require('../instructor/instructor-router');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const server = express();
+const server = express(); 
 
 server.use(helmet());
 server.use(cors());
