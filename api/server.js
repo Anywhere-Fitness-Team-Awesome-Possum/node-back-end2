@@ -6,10 +6,6 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const server = express();  
- 
-server.use(helmet());
-server.use(cors());
-server.use(express.json());
 
 
 server.use(function(req, res, next) {
@@ -17,6 +13,15 @@ server.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+
+ 
+server.use(helmet());
+server.use(cors());
+server.use(express.json());
+
+
+
 
 server.get('/', (req, res) => {
   res.send({server: 'up'});
