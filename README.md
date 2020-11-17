@@ -7,9 +7,7 @@
 
 ## <a name="overview"></a>Overview
 
-AnywhereFitness is the all-in-one solution to meet your “on-location” fitness class needs.
-AnywhereFitness makes it painless for Instructors and Clients alike to hold and attend Fitness
-classes wherever they might be held.
+
 
 ## <a name="api-endpoints"></a>API endpoints
 
@@ -26,7 +24,7 @@ classes wherever they might be held.
 | Method               | Endpoint                         | Body (required)                                                                     | Body (optional) | Notes                                                                                                                                                    |
 | -------------------- | -------------------------------- | ----------------------------------------------------------------------------------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Get classas GET       | /api/auth/instructor/classes     | N/A| N/A             | Gets list of classes|
-| Add class POST       | /api/auth/instructor/classes     | name, instructor_name, type, intensity,location, date, max_size, duration, signedUp | N/A             | Creates a new class object in the database. Date has to string in "2020-11-17" format. Duration is a float.|
+| Add class POST       | /api/auth/instructor/classes     | name, instructor_name, type, intensity,location, date, max_size, duration,  | N/A             | Creates a new class object in the database. Date has to string in "2020-11-17" format. |
 | Update Class PUT     | /api/auth/instructor/classes/:id | any of the field                                                                    | N/A             | Updates the class with given Id                                                                                                                          |
 | Removes Class DELETE | /api/auth/instructor/classes/:id | any of the field                                                                    | N/A             | Deletes the class with given Id                                                                                                                          |
 
