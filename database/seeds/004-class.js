@@ -14,7 +14,9 @@ exports.seed = function(knex) {
           location: 'vegas',
           max_size: 22,
           duration: 1.0,
-          date: '02/10/2020'
+          date: "2020/11/23",
+          number_attendees: 1,
+          start_time:"8:00",
         },
         {
           id: 2,
@@ -22,10 +24,12 @@ exports.seed = function(knex) {
           instructor_name: 'sadhguru',
           type: 'medetation',
           intensity: 'low',
-          location: 'birmingham',
+          location: 'london',
           max_size: 12,
           duration: 2.4,
-          date: '02/10/2020'
+          date: "2020/11/27",
+          number_attendees: 2,
+          start_time:"9:00",
         },
         {
           id: 3,
@@ -36,7 +40,9 @@ exports.seed = function(knex) {
           location: 'japan',
           max_size: 21,
           duration: 1.13,
-          date: '02/10/2020'
+          date: "2020/11/28",
+          number_attendees: 10,
+          start_time:"19:00",
         }
       ]);
     });
