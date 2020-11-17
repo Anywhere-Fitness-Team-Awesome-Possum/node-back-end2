@@ -11,10 +11,12 @@ module.exports = {
   getByLocation,
   getByDuration,
   getByInstructor,
-  addFavorite,
-  getFavoriteClass,
+  addClassToClient,
+  getClientClasses,
   getUserById,
-  findClassesBy
+  findClassesBy,
+
+  deleteSavedClass
 };
 
 function addUser(user) {
@@ -48,6 +50,8 @@ function getClass() {
 
 function getClassById(id) {
   return db('class')
+  .select('*')
+  .from('class')
     .where({id})
     .first();
    
@@ -95,7 +99,7 @@ function getByInstructor(instructor_name) {
     .where({instructor_name});
 }
 
-function addFavorite(user_id, class_id) {
+function addClassToClient(user_id, class_id) {
   return db('user_classes')
     .insert({user_id, class_id})
     .then(() => {
@@ -103,10 +107,18 @@ function addFavorite(user_id, class_id) {
     });
 }
 
-function getFavoriteClass({user_id}) {
-  return db
-    .select('*')
-    .from('user_classes')
+function getClientClasses({user_id}) {
+  return db('user_classes')
     .join('user', 'user.id', 'user_classes.user_id')
-    .where('user.id', '=', `${user_id}`);
+    .where('user.id', `${user_id}`);
+}
+
+
+function deleteSavedClass(savedClass) {
+  return db("user_classes")
+    .where({
+      userId: savedClass.user_id,
+      classesId: savedDetails.class_id,
+    })
+    .del();
 }

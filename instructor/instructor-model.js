@@ -5,40 +5,38 @@ module.exports = {
   updateClass,
   removeClass,
   getClassById,
-  getClass 
+  getClass, 
+  getUsers
 };
 
-function addClass(data) {
-  return db
-    .select('*')
-    .from('class')
-    .insert(data);
+async function addClass(data) {
+  try {
+    const [id] = await db("class").insert(data, "id");
+    return  getClassById(id);
+  } catch (error) {
+    throw error;
+  }
 }
 
 function getClass() {
   return db.select('*').from('class');
 }
 
+function getUsers() {
+  return db.select('*').from('user');
+}
+
 function updateClass(id, changes) {
-  return db
-    .select('*')
-    .from('class')
-    .where({id})
-    .update(changes);
+  return db('class')
+    .where({id}).update(changes);
 }
 
 function removeClass(id) {
-  return db
-    .select('*')
-    .from('class')
-    .where({id})
-    .del();
+  return db('class')
+    .where({id}).del();
 }
 
 function getClassById(id) {
-  return db
-    .select('*')
-    .from('class')
-    .where({id})
-    .first();
+  return db('class')
+    .where({id}).first();
 }

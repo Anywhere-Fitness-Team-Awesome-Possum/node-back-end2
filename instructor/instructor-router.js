@@ -2,6 +2,7 @@ const express = require('express');
 const Class = require('./instructor-model');
 const {checkInstructor} = require('../auth/instructor-middleware');
 const restricted = require('../auth/restricted-middleware');
+const usersModel = require('../users/users-model');
 
 const router = express.Router();
 
@@ -13,6 +14,17 @@ router.get('/', (req, res) => {
   Class.getClass()
     .then(Class => {
       res.status(200).json({Class});
+    })
+    .catch(err => {
+      res.status(500).json({error: err.message});
+    });
+});
+
+
+router.get('/users', (req, res) => {
+  Class.getUsers()
+    .then(user => {
+      res.status(200).json({user});
     })
     .catch(err => {
       res.status(500).json({error: err.message});

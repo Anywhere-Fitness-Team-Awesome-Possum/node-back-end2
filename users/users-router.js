@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.get("/classes/search", (req, res) => {
+router.get("/search", (req, res) => {
   const filter = req.body;
   console.log(filter);
   Users.findClassesBy(filter)
@@ -124,11 +124,11 @@ router.get('/instructor', (req, res) => {
     });
 });
 
-router.post('/:id/favorite', (req, res) => {
+router.post('/:id/newclass', (req, res) => {
   const {class_id} = req.body;
   const user_id = req.params.id;
 
-  Users.addFavorite(user_id, class_id)
+  Users.addClassToClient(user_id, class_id)
     .then(clas => {
       if (clas) {
         res.status(200).json({data: clas});
@@ -141,10 +141,10 @@ router.post('/:id/favorite', (req, res) => {
     });
 });
 
-router.get('/:id/classes', (req, res) => {
+router.get('/:id/enrolled', (req, res) => {
   const user_id = req.params.id;
 
-  Users.getFavoriteClass(user_id)
+  Users.getClientClasses(user_id)
     .then(clas => {
       res.status(200).json({data: clas});
     })
