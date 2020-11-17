@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(restricted);
 router.use(checkInstructor);
 
-
+//get classes
 router.get('/', (req, res) => {
   Class.getClass()
     .then(Class => {
@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     });
 });
 
-
+//get users
 router.get('/users', (req, res) => {
   Class.getUsers()
     .then(user => {
@@ -31,7 +31,7 @@ router.get('/users', (req, res) => {
     });
 });
 
-
+//post a new class 
 router.post('/', (req, res) => {
   const data = req.body;
 
@@ -44,6 +44,8 @@ router.post('/', (req, res) => {
     });
 });
 
+
+//update a class 
 router.put('/:id', (req, res) => {
   const changes = req.body;
   const {id} = req.params;
@@ -61,6 +63,8 @@ router.put('/:id', (req, res) => {
     });
 });
 
+//delete a class 
+
 router.delete('/:id', (req, res) => {
   const {id} = req.params;
 
@@ -77,7 +81,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-
+//get class by id
 
 router.get('/:id', (req, res) => {
   const {id} = req.params;

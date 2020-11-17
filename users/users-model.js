@@ -69,13 +69,9 @@ function findClassesSavedByUser(id) {
 
 
 
-
-
-
-
 async function addClassToClient(save_class_details) {
   try {
-    const [id] = await db("savedClasses").insert(save_class_details, "id");
+    const [id] = await db("user_classes").insert(save_class_details, "id");
     return findClassesSavedByUser(save_class_details.userId);
   } catch (error) {
     throw error;
