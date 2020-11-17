@@ -22,27 +22,26 @@ exports.up = function(knex) {
         tbl
           .string('name')
           .notNullable()
-          .unique()
-          .index();
+          .unique();
     
         tbl.string('instructor_name').notNullable();
         tbl.string('type').notNullable();
         tbl
           .string('intensity')
-          .notNullable()
-          .index();
+          .notNullable();
+        
         tbl
           .string('date')
-          .notNullable()
-          .index();
+          .notNullable();
+    
         tbl
           .string('start_time')
-          .notNullable()
-          .index();
+          .notNullable();
+    
         tbl
           .string('location')
-          .notNullable()
-          .index();
+          .notNullable();
+       
         tbl.string('max_size').notNullable();
         tbl.string('duration').notNullable();
         tbl.string('number_attendees').defaultTo(0);
