@@ -6,18 +6,13 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const server = express(); 
-
+ 
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
 
 server.get('/', (req, res) => {
   res.send({server: 'up'});
-  res.setHeader("Access-Control-Allow-Origin", "*")
-res.setHeader("Access-Control-Allow-Credentials", "true");
-res.setHeader("Access-Control-Max-Age", "1800");
-res.setHeader("Access-Control-Allow-Headers", "content-type");
-res.setHeader( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS" )
 });
 
 server.use('/api/auth', authRouter);
