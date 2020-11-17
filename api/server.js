@@ -5,11 +5,18 @@ const instructorRouter = require('../instructor/instructor-router');
 const cors = require('cors');
 const helmet = require('helmet');
 
-const server = express(); 
+const server = express();  
  
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
+
+
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 
 server.get('/', (req, res) => {
   res.send({server: 'up'});
