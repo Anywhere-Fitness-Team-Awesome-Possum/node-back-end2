@@ -9,7 +9,8 @@ module.exports = {
   getClientClasses,
   getUserById,
   findClassesBy,
-  deleteSavedClass
+  deleteSavedClass,
+  getClassById
 };
 
 function addUser(user) {
@@ -41,6 +42,9 @@ function getClass() {
   return db.select('*').from('class');
 }
 
+function getClassById(id) {
+  return db('class').where({id});
+}
 
 function findClassesBy(filter) {
   return db("class").where(filter);
@@ -48,13 +52,40 @@ function findClassesBy(filter) {
 
 
 
-function addClassToClient(user_id, class_id) {
-  return db('user_classes')
-    .insert({user_id, class_id})
-    .then(() => {
-      return getClassById(user_id);
-    });
+// function addClassToClient(user_id, class_id) {
+//   return db('user_classes')
+//     .insert({user_id, class_id,"id"})
+//     .then(() => {
+//       return getClientClasses(user_id);
+//     });
+// }
+
+function findClassesSavedByUser(id) {
+  return db("user_classes as s")
+    .join("classes as c", "c.id", "s.class_id")
+    .select("s.user_id", "s.class_id", "c.*")
+    .where({ userId: id });
 }
+
+
+
+
+
+
+
+async function addClassToClient(save_class_details) {
+  try {
+    const [id] = await db("savedClasses").insert(save_class_details, "id");
+    return findClassesSavedByUser(save_class_details.userId);
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+
+
+
 
 function getClientClasses({user_id}) {
   return db('user_classes')

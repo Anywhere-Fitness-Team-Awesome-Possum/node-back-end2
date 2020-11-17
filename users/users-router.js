@@ -1,6 +1,7 @@
 const express = require('express');
 const Users = require('./users-model');
 const restricted = require('../auth/restricted-middleware');
+const { getUsers } = require('./users-model');
 
 const router = express.Router();
 
@@ -17,6 +18,21 @@ router.get('/', (req, res) => {
 });
 
 
+router.get('/users/:id', (req, res) => {
+  const { id } = req.params;
+  Users.getUserById(id)
+ 
+    .then(users => {
+      res.status(200).json({data: users});
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Could not fetch users', error: err.message});
+    });
+});
+
+
+
+
 router.get("/search", (req, res) => {
   const filter = req.body;
   console.log(filter);
@@ -31,13 +47,13 @@ router.get("/search", (req, res) => {
 });
 
 
-router.post('/:id/newclass', (req, res) => {
+router.post('/users/:id/newclass', (req, res) => {
   const {class_id} = req.body;
   const user_id = req.params.id;
 
   Users.addClassToClient(user_id, class_id)
     .then(clas => {
-      if (clas) {
+      if (clas) { 
         res.status(200).json({data: clas});
       } else {
         res.status(404).json({message: 'invalid id'});
@@ -48,7 +64,7 @@ router.post('/:id/newclass', (req, res) => {
     });
 });
 
-router.get('/:id/enrolled', (req, res) => {
+router.get('/users/:id/enrolled', (req, res) => {
   const user_id = req.params.id;
 
   Users.getClientClasses(user_id)

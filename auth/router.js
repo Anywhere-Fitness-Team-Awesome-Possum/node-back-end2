@@ -39,7 +39,7 @@ router.post('/login', (req, res) => {
       .then(([user]) => {
         if (user && bcryptjs.compareSync(password, user.password)) {
           const token = generateToken(user);
-          res.status(200).json({message: 'logged in', token, role: user.role});
+          res.status(200).json({message: 'logged in', token, user});
         }
       })
       .catch(err => {

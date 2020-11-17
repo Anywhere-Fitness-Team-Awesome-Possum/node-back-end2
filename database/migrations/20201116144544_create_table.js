@@ -36,13 +36,16 @@ exports.up = function(knex) {
           .notNullable()
           .index();
         tbl
+          .string('start_time')
+          .notNullable()
+          .index();
+        tbl
           .string('location')
           .notNullable()
           .index();
-        tbl.integer('max_size').notNullable();
-        tbl.float('duration').notNullable();
-        tbl.bool('signedUp').defaultTo('false');
-        tbl.integer('current_members').defaultTo(0);
+        tbl.string('max_size').notNullable();
+        tbl.string('duration').notNullable();
+        tbl.string('number_attendees').defaultTo(0);
       })
       .createTable('instructor', tbl => {
         tbl.increments();
@@ -90,8 +93,10 @@ exports.up = function(knex) {
     
     exports.down = function(knex) {
       return knex.schema
-      .dropTableIfExists('user')
-     .dropTableIfExists('class')
+    
+      .dropTableIfExists('user_classes')
       .dropTableIfExists('instructor')
-      .dropTableIfExists('user_classes');
+      .dropTableIfExists('class')
+      .dropTableIfExists('user');
+     
     };
