@@ -4,18 +4,11 @@ module.exports = {
   addUser,
   getUsers,
   findBy,
-  getClassById,
-  getClassType,
   getClass,
-  getIntensity,
-  getByLocation,
-  getByDuration,
-  getByInstructor,
   addClassToClient,
   getClientClasses,
   getUserById,
   findClassesBy,
-
   deleteSavedClass
 };
 
@@ -48,56 +41,12 @@ function getClass() {
   return db.select('*').from('class');
 }
 
-function getClassById(id) {
-  return db('class')
-  .select('*')
-  .from('class')
-    .where({id})
-    .first();
-   
-}
-
-function getClassType(type) {
-  return db
-    .select('*')
-    .from('class')
-    .where('class.type',`${type}`);
-}
-
-function getIntensity(intensity) {
-  return db
-    .select('*')
-    .from('class')
-    .where({intensity});
-}
-
-function getByLocation(location) {
-  return db
-    .select('*')
-    .from('class')
-    .where({location});
-}
-
-function getByDuration(duration) {
-  return db
-    .select('*')
-    .from('class')
-    .where({duration});
-}
-
 
 function findClassesBy(filter) {
   return db("class").where(filter);
 }
 
 
-
-function getByInstructor(instructor_name) {
-  return db
-    .select('*')
-    .from('class')
-    .where({instructor_name});
-}
 
 function addClassToClient(user_id, class_id) {
   return db('user_classes')
