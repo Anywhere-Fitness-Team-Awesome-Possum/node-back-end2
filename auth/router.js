@@ -33,7 +33,12 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res) => {
   const {username, password} = req.body;
-
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept",
+  };  
+  res.set(headers);
   if (isValid(req.body)) {
     Users.findBy({username})
       .then(([user]) => {
