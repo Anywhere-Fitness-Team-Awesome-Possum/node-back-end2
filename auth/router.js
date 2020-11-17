@@ -32,15 +32,16 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  const {username, password} = req.body;
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers":
       "Origin, X-Requested-With, Content-Type, Accept",
-  };  
+  }; 
   res.set(headers);
-  if (isValid(req.body)) {
-    Users.findBy({username})
+  const {username, password} = req.body;
+ 
+  if (isValid(req.body)) { 
+    Users.findBy({username}) 
       .then(([user]) => {
         if (user && bcryptjs.compareSync(password, user.password)) {
           const token = generateToken(user);
