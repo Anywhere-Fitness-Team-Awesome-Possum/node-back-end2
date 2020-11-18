@@ -10,7 +10,7 @@ module.exports = {
   getUserById,
   findClassesBy,
   deleteSavedClass,
-  getClassById
+  getClassById, addFavorite
 };
 
 function addUser(user) {
@@ -97,4 +97,15 @@ function deleteSavedClass(savedClass) {
       classesId: savedDetails.class_id,
     })
     .del();
+}
+
+
+
+
+function addFavorite(user_id, class_id) {
+  return db('user_classes')
+    .insert({user_id, class_id})
+    .then(() => {
+      return getUserById(user_id);
+    });
 }

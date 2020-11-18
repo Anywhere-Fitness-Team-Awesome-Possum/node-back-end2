@@ -17,6 +17,21 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  Users.getClassById(id)
+ 
+    .then(classes => {
+      res.status(200).json({data: classes});
+    })
+    .catch(err => {
+      res.status(500).json({message: 'Could not fetch users', error: err.message});
+    });
+});
+
+
+
+
 
 router.get('/users/:id', (req, res) => {
   const { id } = req.params;
@@ -75,6 +90,28 @@ router.get('/users/:id/enrolled', (req, res) => {
       res.status(500).json({error: err.message});
     });
 });
+
+
+
+
+router.post('/:id/favorite', (req, res) => {
+  const {class_id} = req.body;
+  const user_id = req.params.id;
+
+  Users.addFavorite(user_id, class_id)
+    .then(clas => {
+      if (clas) {
+        res.status(200).json({data: clas});
+      } else {
+        res.status(404).json({message: 'invalid id'});
+      }
+    })
+    .catch(err => {
+      res.status(500).json({message: err.message});
+    });
+});
+
+
 
 
 
