@@ -15,6 +15,7 @@ exports.up = function(knex) {
           .index();
         tbl.string('password').notNullable();
         tbl.string('role').notNullable();
+        tbl.bool('signedUp').defaultTo('false');
       })
 
     .createTable('class', tbl => {
@@ -45,6 +46,7 @@ exports.up = function(knex) {
         tbl.string('max_size').notNullable();
         tbl.string('duration').notNullable();
         tbl.string('number_attendees').defaultTo(0);
+        tbl.string('punch_pass').notNullable();
       })
       .createTable('instructor', tbl => {
         tbl.increments();

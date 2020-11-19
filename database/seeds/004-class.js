@@ -17,6 +17,7 @@ exports.seed = function(knex) {
           date: "2020/11/23",
           number_attendees: 1,
           start_time:"8:00",
+          punch_pass:"true"
         },
         {
           id: 2,
@@ -30,6 +31,7 @@ exports.seed = function(knex) {
           date: "2020/11/27",
           number_attendees: 2,
           start_time:"9:00",
+          punch_pass:"false"
         },
         {
           id: 3,
@@ -43,6 +45,7 @@ exports.seed = function(knex) {
           date: "2020/11/28",
           number_attendees: 10,
           start_time:"19:00",
+          punch_pass:"true"
         }
       ]);
     });
