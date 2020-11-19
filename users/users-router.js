@@ -18,7 +18,30 @@ router.get('/', (req, res) => {
     });
 });
 
-//get classes by id
+//get users
+router.get('/users', (req, res) => {
+  Users.getUsers()
+     .then(user => {
+       res.status(200).json({user});
+     })
+     .catch(err => {
+       res.status(500).json({error: err.message});
+     });
+ });
+
+ //get all saved classes by user id
+ router.get('/savedclasses/:id', (req, res) => {
+  const { id } = req.params;
+  Users.getFavoriteClass(id)
+     .then(user => {
+       res.status(200).json({data:user });
+     })
+     .catch(err => {
+       res.status(500).json({error: err.message});
+     });
+ });
+
+//get classes by class id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
   Users.getClassById(id)
@@ -32,18 +55,9 @@ router.get('/:id', (req, res) => {
 });
 
 
-// router.get('/users', (req, res) => {
-//  Users.getUsers()
-//     .then(user => {
-//       res.status(200).json({user});
-//     })
-//     .catch(err => {
-//       res.status(500).json({error: err.message});
-//     });
-// });
 
 
-//get users by id
+//get users by user id
 router.get('/users/:id', (req, res) => {
   const { id } = req.params;
   Users.getUserById(id)
@@ -55,6 +69,9 @@ router.get('/users/:id', (req, res) => {
       res.status(500).json({message: 'Could not fetch users', error: err.message});
     });
 });
+
+
+
 
 //search classes by details 
 router.get("/search", (req, res) => {
@@ -119,20 +136,6 @@ router.post('/:id/newclass', (req, res) => {
       res.status(500).json({message: err.message});
     });
 });
-
-//get list of users' classes 
-router.get('/:id/classes', (req, res) => {
-  const user_id = req.params.id;
-
-  Users.getFavoriteClass(user_id)
-    .then(clas => {
-      res.status(200).json({data: clas});
-    })
-    .catch(err => {
-      res.status(500).json({error: err.message});
-    });
-});
-
 
 
 

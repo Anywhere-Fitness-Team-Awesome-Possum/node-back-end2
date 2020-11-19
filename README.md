@@ -7,6 +7,7 @@
 
 ## <a name="overview"></a>Overview
 
+This project was focused on designing a application that would support a gym with providing a databse to create users as either a client or instructor. Clients will have the ability to view classes and save them to their profile. Instructors can view classes, create classes, upadate and delete classes.
 
 
 ## <a name="api-endpoints"></a>API endpoints
