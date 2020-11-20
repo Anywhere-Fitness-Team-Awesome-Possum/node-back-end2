@@ -43,7 +43,7 @@ router.get('/users', (req, res) => {
 
 
  //deleted saved class by user id
- router.delete('/savedclasses/:id', (req, res) => {
+ router.put('/savedclasses/:id', (req, res) => {
   const { id } = req.params;
   Users.removeClass(id)
      .then(user => {
