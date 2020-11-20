@@ -13,7 +13,9 @@ module.exports = {
   //deleteSavedClass,
   getClassById, 
   addFavorite,
-  getFavoriteClass
+  getFavoriteClass,
+  updateClass,
+  removeClass
 };
 
 function addUser(user) {
@@ -80,4 +82,16 @@ function addFavorite(user_id, class_id) {
 
 function getFavoriteClass(id) {
   return db.select('*').from('user_classes').where({user_id:id})
+
+}
+
+
+function updateClass(id, changes) {
+  return db('class')
+    .where({id}).update(changes);
+}
+
+function removeClass(id) {
+  return db('user_classes')
+    .where({class_id:id}).del();
 }

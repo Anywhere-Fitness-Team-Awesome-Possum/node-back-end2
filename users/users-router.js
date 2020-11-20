@@ -41,6 +41,23 @@ router.get('/users', (req, res) => {
      });
  });
 
+
+ //deleted saved class by user id
+ router.delete('/savedclasses/:id', (req, res) => {
+  const { id } = req.params;
+  Users.removeClass(id)
+     .then(user => {
+       res.status(200).json({data:user });
+     })
+     .catch(err => {
+       res.status(500).json({error: err.message});
+     });
+ });
+
+
+
+
+
 //get classes by class id
 router.get('/:id', (req, res) => {
   const { id } = req.params;
@@ -54,7 +71,23 @@ router.get('/:id', (req, res) => {
     });
 });
 
+//update class by id
+router.put('/:id', (req, res) => {
+  const changes = req.body;
+  const {id} = req.params;
 
+  Users.updateClass(id, changes)
+    .then(Class => {
+      if (Class) {
+        res.status(200).json({Class});
+      } else {
+        res.status(404).json({error: 'please provide right information'});
+      }
+    })
+    .catch(err => {
+      res.status(500).json({message: 'There was an error updating', error: err.message});
+    });
+});
 
 
 //get users by user id
