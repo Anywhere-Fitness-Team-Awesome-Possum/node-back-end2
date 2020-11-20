@@ -77,7 +77,7 @@ router.delete('/:id', (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json({message: 'Error deleting class'});
+      res.status(500).json({message: 'Error deleting class', err: err.message});
     });
 });
 

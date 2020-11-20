@@ -57,7 +57,7 @@ exports.up = function(knex) {
           .unique()
           .references('id')
           .inTable('user')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE');
     
         tbl
@@ -66,7 +66,7 @@ exports.up = function(knex) {
           .unique()
           .references('id')
           .inTable('classes')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE');
       })
     
@@ -78,7 +78,7 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('user')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE');
     
         tbl
@@ -86,7 +86,7 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('class')
-          .onDelete('RESTRICT')
+          .onDelete('CASCADE')
           .onUpdate('CASCADE');
       });
     
@@ -94,10 +94,10 @@ exports.up = function(knex) {
     
     exports.down = function(knex) {
       return knex.schema
-    
-      .dropTableIfExists('user_classes')
-      .dropTableIfExists('instructor')
+      .dropTableIfExists('user')
       .dropTableIfExists('class')
-      .dropTableIfExists('user');
+      .dropTableIfExists('instructor')
+      .dropTableIfExists('user_classes')
      
+      
     };

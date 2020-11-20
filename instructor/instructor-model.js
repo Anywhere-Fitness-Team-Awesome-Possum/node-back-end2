@@ -31,9 +31,14 @@ function updateClass(id, changes) {
     .where({id}).update(changes);
 }
 
-function removeClass(id) {
-  return db('class')
-    .where({id}).del();
+// function removeClass(id) {
+//   return db('class')
+//     .where({id}).delete();
+// }
+
+
+function removeClass(classid) {
+  return db("class").where("id", classid).del();
 }
 
 function getClassById(id) {
